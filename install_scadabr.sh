@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script can install ScadaBR-EF and other ScadaBR
+# This script can install ScadaBR 1.2 and other ScadaBR
 # versions in Linux based systems
 
 function checkFiles {
@@ -62,9 +62,8 @@ function installTomcat {
 	echo "   * Renaming Tomcat folder"
 	mv apache-tomcat* tomcat
 	
-	echo "   * Extracting ScadaBR into Tomcat..."
-	mkdir -p "${INSTALL_FOLDER}/tomcat/webapps/ScadaBR"
-	unzip "${CURRENT_FOLDER}/${scadabr}" -d "${INSTALL_FOLDER}/tomcat/webapps/ScadaBR" > /tmp/scadabrInstall.log 2>&1
+	echo "   * Copying ScadaBR into Tomcat..."
+	cp "${CURRENT_FOLDER}/${scadabr}" "${INSTALL_FOLDER}/tomcat/webapps/${scadabr}"
 	
 	echo "   * Setting permissions..."
 	chmod 755 -R tomcat/
@@ -113,6 +112,8 @@ function getLibraryPath {
 	fi
 	
 	# Add RXTX path (in Ubuntu/Mint) to library path
+	# This is a deprecated feature, since ScadaBR 1.2
+	# uses NRJavaSerial
 	if [[ "$CUR_LIB_PATH" == *"/usr/lib/jni"* ]]; then
 		LIBRARY_PATH=$CUR_LIB_PATH
 	else
@@ -158,15 +159,15 @@ function createStartupService {
 
 function finishInstall {
 	echo
-	echo "ScadaBR-EF was successfully installed."
+	echo "ScadaBR was successfully installed."
 	echo 
 	
 	if [[ "$1" != 'silent' ]]; then
-		echo "Launch ScadaBR-EF now? (y/n)"
+		echo "Launch ScadaBR now? (y/n)"
 
 		read launch
 		if [[ $launch == 'y' ]] || [[ $launch == 'Y' ]]; then
-			echo "Launching ScadaBR-EF..."
+			echo "Launching ScadaBR..."
 			"${INSTALL_FOLDER}/tomcat/bin/startup.sh" > /dev/null
 		fi
 	fi
@@ -186,17 +187,17 @@ fi
 
 MACHINE_TYPE=$(uname -m)
 CURRENT_FOLDER=$(pwd)
-INSTALL_FOLDER=/opt/ScadaBR-EF
+INSTALL_FOLDER=/opt/ScadaBR
 
 # Files
 tomcat=apache-tomcat.tar.gz
 scadabr=ScadaBR.war
 java_x86=openlogic-openjdk-jre-8u292-b10-linux-x32.tar.gz
-java_x64=OpenJDK8U-jre_x64_linux_hotspot_8u292b10.tar.gz
+java_x64=OpenJDK8U-jre_x64_linux_hotspot_8u302b08.tar.gz
 java_arm32=OpenJDK8U-jre_arm_linux_hotspot_8u292b10.tar.gz
-java_arm64=OpenJDK8U-jre_aarch64_linux_hotspot_8u292b10.tar.gz
+java_arm64=OpenJDK8U-jre_aarch64_linux_hotspot_8u302b08.tar.gz
 
-echo "Welcome to ScadaBR-EF installer!"
+echo "Welcome to ScadaBR installer for Linux!"
 echo
 
 case $MACHINE_TYPE in

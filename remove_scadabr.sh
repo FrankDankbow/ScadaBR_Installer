@@ -74,14 +74,14 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Setting  variables...
-INSTALL_FOLDER=/opt/ScadaBR-EF
+INSTALL_FOLDER=/opt/ScadaBR
 
 
-echo "Welcome to ScadaBR-EF uninstaller!"
+echo "Welcome to ScadaBR uninstaller!"
 echo
 confirmUninstall
 stopTomcat
 removeFiles
 removeStartupService
 echo
-echo "ScadaBR-EF was successfully removed."
+echo "ScadaBR was successfully removed."
