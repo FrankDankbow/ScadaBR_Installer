@@ -7,7 +7,7 @@ function checkFiles {
 	
     if [[ -f "$java" ]] && [[ -f "$tomcat" ]] && [[ -f "$scadabr" ]] ; then
 		# Installer files present, continue
-		echo "Files present! Lets go to install!"
+		echo "Files present! Let's go to install!"
     else
 		# Files not present. Abort
 		echo "ERROR: Java, ScadaBR and/or Tomcat files not found! Aborting." 
