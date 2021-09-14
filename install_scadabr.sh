@@ -35,7 +35,7 @@ function installJava {
 	cp "${CURRENT_FOLDER}/$java" "$INSTALL_FOLDER/$java"
 	
 	echo "   * Extracting Java files..."
-	tar xvzf "$java" > /tmp/scadabrInstall.log && rm "$java"
+	tar xvzf "$java" >> /tmp/scadabrInstall.log && rm "$java"
 	
 	echo "   * Setting permissions..."
 	chmod 755 -R *jre* || chmod 755 -R *jdk*
@@ -57,13 +57,14 @@ function installTomcat {
 	cp "${CURRENT_FOLDER}/$tomcat" "$INSTALL_FOLDER/$tomcat"
 	
 	echo "   * Extratcting tomcat files..."
-	tar xvf "$tomcat" > /tmp/scadabrInstall.log && rm "$tomcat"
+	tar xvf "$tomcat" >> /tmp/scadabrInstall.log && rm "$tomcat"
 	
 	echo "   * Renaming Tomcat folder"
 	mv apache-tomcat* tomcat
 	
 	echo "   * Copying ScadaBR into Tomcat..."
 	cp "${CURRENT_FOLDER}/${scadabr}" "${INSTALL_FOLDER}/tomcat/webapps/${scadabr}"
+	unzip "${CURRENT_FOLDER}/${scadabr}" -d "${INSTALL_FOLDER}/tomcat/webapps/ScadaBR/" >> /tmp/scadabrInstall.log
 	
 	echo "   * Setting permissions..."
 	chmod 755 -R tomcat/
