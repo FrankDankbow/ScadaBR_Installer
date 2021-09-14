@@ -2,6 +2,17 @@
 # This script can install ScadaBR 1.2 and other ScadaBR
 # versions in Linux based systems
 
+function CreateScriptScadaBR {
+   #put scadabr script
+cp "${CURRENT_FOLDER}/scadabr.sh" "$INSTALL_FOLDER/scadabr.sh"
+chmod +x "$INSTALL_FOLDER/scadabr.sh"
+
+ln -s "/bin/scadabr.sh"
+# change name of INSTALL_FOLDER
+
+sed -i ‘18c\INSTALL_DIR="$INSTALL_FOLDER"’    "$INSTALL_FOLDER/scadabr.sh"
+}
+
 function checkFiles {
 	cd "$CURRENT_FOLDER"
 	
@@ -68,7 +79,8 @@ function installTomcat {
 	
 	echo "   * Setting permissions..."
 	chmod 755 -R tomcat/
-	
+	echo "   * Creating scadabr script..."
+	CreateScriptScadaBR
 	echo "Done."
 	echo
 }
