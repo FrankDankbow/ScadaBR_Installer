@@ -7,10 +7,10 @@ function CreateScriptScadaBR {
 cp "${CURRENT_FOLDER}/scadabr.sh" "$INSTALL_FOLDER/scadabr.sh"
 chmod +x "$INSTALL_FOLDER/scadabr.sh"
 
-ln -s "/bin/scadabr.sh"
+ln -s "$INSTALL_FOLDER/scadabr.sh" /bin/scadabr
 # change name of INSTALL_FOLDER
 
-sed -i ‘18c\INSTALL_DIR="$INSTALL_FOLDER"’    "$INSTALL_FOLDER/scadabr.sh"
+sed -i '18c\INSTALL_DIR="$INSTALL_FOLDER"'    "$INSTALL_FOLDER/scadabr.sh"
 }
 
 function checkFiles {
