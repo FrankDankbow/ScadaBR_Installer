@@ -51,6 +51,8 @@ function removeFiles {
 		exit 1
 	fi
 }
+# Remove scadabr symbolic Link 
+rm -f /bin/scadabr
 
 # Remove startup service (for now we are using a crontab workaround)
 function removeStartupService {
