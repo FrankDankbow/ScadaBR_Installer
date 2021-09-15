@@ -43,16 +43,19 @@ function removeFiles {
 	fi
 	
 	if [[ -d "$INSTALL_FOLDER" ]]; then
+	
 		echo "Removing folders..."
 		rm -rf "$INSTALL_FOLDER"
+		# Remove scadabr symbolic Link 
+		rm -f /bin/scadabr
 	else
 		echo "Installation folder not found! Is ScadaBR installed?"
 		echo "Aborting."
 		exit 1
 	fi
+	
 }
-# Remove scadabr symbolic Link 
-rm -f /bin/scadabr
+
 
 # Remove startup service (for now we are using a crontab workaround)
 function removeStartupService {
