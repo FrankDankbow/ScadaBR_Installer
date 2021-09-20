@@ -1,4 +1,4 @@
-# ScadaBR Installer for ScadaBR
+# ScadaBR Installer for Linux
 (Forked from thiagoralves/ScadaBR_Installer)
 
 
