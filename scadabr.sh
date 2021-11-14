@@ -14,7 +14,8 @@ RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
 ENDCOLOR="\e[0m"
-TOMCAT_PID=$(ps -ef | awk '/[t]omcat/{print $2}')
+TOMCAT_PID_OLD=$(ps -ef | awk '/[t]omcat/{print $2}')
+TOMCAT_PID=$(ps -Af | grep -v grep | grep tomcat | grep catalina | awk '{ print $2 }')
 INSTALL_DIR="/opt/ScadaBR"
 
 d_status ()
