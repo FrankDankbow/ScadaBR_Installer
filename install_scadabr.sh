@@ -91,26 +91,29 @@ function getTomcatSettings {
 	
 	key=n
 	
-	while [[ $key == "n" ]]; do
-		read -p "Define Tomcat port (default: 8080): " TOMCAT_PORT
-		read -p "Define a username for tomcat-manager (default: tomcat): " TOMCAT_USER
-		read -p "Define a password for created user: " TOMCAT_PASSWORD
-		echo "============================"
+	#while [[ $key == "n" ]]; do
+		#read -p "Define Tomcat port (default: 8080): " TOMCAT_PORT
+		#read -p "Define a username for tomcat-manager (default: tomcat): " TOMCAT_USER
+		#read -p "Define a password for created user: " TOMCAT_PASSWORD
+  	TOMCAT_PORT=8080
+   	TOMCAT_USER=tomcat
+    	TOMCAT_PASSWORD=password
+	echo "============================"
 		
-		[[ $TOMCAT_PORT -gt 0 ]] || TOMCAT_PORT=8080
-		[[ -n $TOMCAT_USER ]] || TOMCAT_USER=tomcat
-		[[ -n $TOMCAT_PASSWORD ]] || TOMCAT_PASSWORD=!tc${RANDOM}
+	[[ $TOMCAT_PORT -gt 0 ]] || TOMCAT_PORT=8080
+	[[ -n $TOMCAT_USER ]] || TOMCAT_USER=tomcat
+	[[ -n $TOMCAT_PASSWORD ]] || TOMCAT_PASSWORD=password
 		
-		echo
-		echo "Tomcat port will be set to: $TOMCAT_PORT"
-		echo
-		echo "The following user will be created to access tomcat-manager:"
-		echo "Username: \"$TOMCAT_USER\""
-		echo "Password: \"$TOMCAT_PASSWORD\""
-		echo
-		echo "Type n to change data or press ENTER to continue."
-		read key
-	done
+	echo
+	echo "Tomcat port will be set to: $TOMCAT_PORT"
+	echo
+	echo "The following user will be created to access tomcat-manager:"
+	echo "Username: \"$TOMCAT_USER\""
+	echo "Password: \"$TOMCAT_PASSWORD\""
+	echo
+	echo "Type n to change data or press ENTER to continue."
+		#read key
+	#done
 	echo
 }
 
@@ -178,7 +181,8 @@ function finishInstall {
 	if [[ "$1" != 'silent' ]]; then
 		echo "Launch ScadaBR now? (y/n)"
 
-		read launch
+		#read launch
+  		launch=y
 		if [[ $launch == 'y' ]] || [[ $launch == 'Y' ]]; then
 			echo "Launching ScadaBR..."
 			"${INSTALL_FOLDER}/tomcat/bin/startup.sh" > /dev/null
